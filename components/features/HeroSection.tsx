@@ -189,6 +189,7 @@ const HeroSection = () => {
         <h1 className="text-6xl sm:text-7xl md:text-9xl lg:text-[10rem] font-bold tracking-tighter text-white mb-4 md:mb-4 leading-[0.85]">
           ARIXON <span className="text-primary italic font-light tracking-normal">LABS</span>
         </h1>
+        <h2 className="sr-only">Best IT Company for Custom AI & SaaS Development</h2>
         <p className="text-base md:text-2xl text-foreground/70 max-w-3xl mx-auto font-light leading-relaxed tracking-tight">
           Engineering high-performance software <br className="hidden md:block" /> for the next generation of business.
         </p>

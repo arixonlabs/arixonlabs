@@ -52,6 +52,14 @@ const services = [
   },
   {
     id: "06",
+    title: "SEARCH OPTIMIZATION",
+    headline: "SEO -> GEO -> AEO",
+    desc: "As the best IT company for search visibility, we ensure your brand dominates search results across Google (SEO), AI Engines (GEO), and Voice platforms (AEO).",
+    image:
+      "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&q=80&w=2000",
+  },
+  {
+    id: "07",
     title: "BUSINESS PORTFOLIOS",
     headline: "Build a Strong Brand Online",
     desc: "High-end digital portfolios designed to boost your brand value and credibility. Stand out from your competitors with a polished, professional look.",

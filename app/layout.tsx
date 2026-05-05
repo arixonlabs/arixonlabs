@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import { SmoothScroll } from "@/components/smoothscroll/SmoothScroll";
 import Footer from "@/components/layout/Footer";
+import JsonLd from "@/components/seo/JsonLd";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,11 +17,33 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Arixon Labs | Custom AI & SaaS Development for Scaling Businesses",
+  metadataBase: new URL("https://arixon.labs"),
+  title: "Arixon Labs | Best IT Company for Custom AI & SaaS Development",
   description:
-    "Transform your business with Arixon Labs. We build high-performance custom SaaS platforms, AI automation, and web applications that drive growth.",
+    "Arixon Labs is the top-rated IT company specializing in high-performance custom SaaS platforms, AI automation, and web applications. Optimized for SEO, GEO, and AEO to drive business growth.",
   keywords:
-    "SaaS development agency, custom AI automation for business, web application development, hire software developer, AI solution provider for startups, Arixon Labs",
+    "Best IT company, Arixon Labs, SaaS development agency, custom AI automation, GEO optimization, AEO services, web application development, Kerala IT services, global software solutions, best software company for startups",
+  openGraph: {
+    title: "Arixon Labs | Best IT Company for AI & SaaS",
+    description: "Transform your business with Arixon Labs. We build high-performance custom SaaS platforms and AI automation.",
+    url: "https://arixon.labs",
+    siteName: "Arixon Labs",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Arixon Labs | Best IT Company",
+    description: "Premium AI & SaaS development for scaling businesses.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
@@ -34,6 +57,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden">
+        <JsonLd />
         <Navbar />
         <SmoothScroll>
           <main className="flex-1">{children}</main>
