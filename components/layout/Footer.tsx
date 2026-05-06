@@ -173,7 +173,7 @@ const Footer = () => {
           
           <button 
             onClick={scrollToTop}
-            className="group flex items-center gap-4 text-foreground/40 hover:text-white transition-colors"
+            className="group flex cursor-pointer items-center gap-4 text-foreground/40 hover:text-white transition-colors"
           >
             <span className="font-mono text-[10px] tracking-widest uppercase">BACK TO TOP</span>
             <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary group-hover:text-primary transition-all">

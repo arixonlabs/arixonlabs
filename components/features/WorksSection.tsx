@@ -81,10 +81,11 @@ const WorksSection = () => {
 
 
     mm.add("(max-width: 767px)", () => {
-      // Balanced speed for mobile (faster than before but still optimized)
-      setupMarquee(marqueeRef1, 1, 60);
-      setupMarquee(marqueeRef2, -1, 75);
+      // Faster, high-energy scroll for mobile
+      setupMarquee(marqueeRef1, 1, 10);
+      setupMarquee(marqueeRef2, -1, 30);
     });
+
 
 
 

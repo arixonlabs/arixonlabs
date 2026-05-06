@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Plus } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -104,7 +104,16 @@ const FaqSection = () => {
   );
 
   const toggleFaq = (index: number | null) => {
-    if (index === activeIndex) return;
+    // If clicking the same index, close it
+    if (index === activeIndex && index !== null) {
+      const currentContent = document.getElementById(`faq-content-${activeIndex}`);
+      if (currentContent) {
+        gsap.to(currentContent, { height: 0, opacity: 0, duration: 0.4, ease: "power2.inOut" });
+      }
+      setActiveIndex(null);
+      return;
+    }
+
     const isOpening = index !== null;
     const currentContent = document.getElementById(
       `faq-content-${activeIndex}`,
@@ -179,12 +188,16 @@ const FaqSection = () => {
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                onMouseEnter={() => toggleFaq(index)}
-                onMouseLeave={() => toggleFaq(null)}
-                className={`faq-item group border  transition-all duration-700 rounded-2xl overflow-hidden ${
+                onMouseEnter={() => {
+                  if (window.innerWidth >= 1024) toggleFaq(index);
+                }}
+                onMouseLeave={() => {
+                  if (window.innerWidth >= 1024) toggleFaq(null);
+                }}
+                className={`faq-item group border transition-all duration-700 rounded-2xl overflow-hidden ${
                   activeIndex === index
                     ? "bg-primary/20 border-primary/60 shadow-[0_0_50px_rgba(var(--primary-rgb),0.2)] scale-[1.02] cursor-pointer"
-                    : "bg-white/10 border-white/10 hover:bg-white/15 hover:border-white/25 hover:translate-x-2  cursor-pointer"
+                    : "bg-white/10 border-white/10 hover:bg-white/15 hover:border-white/25 hover:translate-x-2 cursor-pointer"
                 }`}
               >
                 <button
@@ -205,11 +218,15 @@ const FaqSection = () => {
                   <div
                     className={`shrink-0 w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-500 ${
                       activeIndex === index
-                        ? "bg-primary border-primary text-black rotate-45 scale-110"
+                        ? "bg-primary border-primary text-black rotate-90 scale-110"
                         : "border-white/10 text-white/30"
                     }`}
                   >
-                    <Plus size={24} strokeWidth={1} />
+                    {activeIndex === index ? (
+                      <X size={24} strokeWidth={1.5} />
+                    ) : (
+                      <ChevronDown size={24} strokeWidth={1.5} />
+                    )}
                   </div>
                 </button>
 
