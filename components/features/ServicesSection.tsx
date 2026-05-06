@@ -162,7 +162,7 @@ const ServicesSection = () => {
           {services.map((s, i) => (
             <div
               key={s.id}
-              className={`service-card relative md:absolute inset-0 w-full md:h-full flex items-center justify-center p-6 md:p-12 mb-24 md:mb-0 will-change-transform md:opacity-0 ${i === 0 ? "z-10" : "z-0"}`}
+              className={`service-card relative md:absolute inset-0 w-full md:h-full flex items-center justify-center p-6 md:p-12 mb-24 md:mb-0 will-change-transform ${i === 0 ? "z-10" : "z-0 md:opacity-0"}`}
             >
               <div className="container mx-auto grid md:grid-cols-2 gap-8 items-center max-w-6xl">
                 <div className={`service-image-wrapper relative aspect-video md:aspect-16/10 overflow-hidden rounded-xl border border-white/10 shadow-2xl will-change-transform ${i % 2 === 1 ? "md:order-2" : ""}`}>

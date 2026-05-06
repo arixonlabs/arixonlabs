@@ -101,7 +101,7 @@ const HeroSection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative z-20 min-h-svh w-full overflow-hidden flex flex-col justify-center items-center text-center bg-background"
+      className="relative min-h-svh w-full overflow-hidden flex flex-col justify-center items-center text-center bg-background"
     >
       {/* 1. Primary Background Layer */}
       <div
