@@ -91,10 +91,11 @@ const Footer = () => {
     <footer ref={footerRef} className="relative z-30 bg-[#020617] border-t border-white/5 pt-16 pb-8 px-6 overflow-hidden">
       {/* Cinematic Background Watermark */}
       <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-[0.02]">
-        <h2 className="text-[20vw] font-black tracking-tighter select-none">
+        <div className="text-[20vw] font-black tracking-tighter select-none">
           ARIXON
-        </h2>
+        </div>
       </div>
+
 
       {/* Cinematic Glow Overlay */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-linear-to-r from-transparent via-primary/20 to-transparent" />
@@ -105,55 +106,61 @@ const Footer = () => {
         
           {/* Column 1: Brand */}
           <div className="footer-col lg:col-span-2 flex flex-col gap-6">
-            <Link href="/" className="relative h-12 w-32 -ml-4">
+            <Link href="/" aria-label="Arixon Labs Home" className="relative h-12 w-32 -ml-4">
               <Image 
                 src="/assets/logo.png" 
-                alt="Arixon Labs" 
+                alt="Arixon Labs Logo" 
                 fill 
                 className="object-contain brightness-110" 
               />
             </Link>
-            <p className="text-foreground/50 max-w-sm text-lg font-light leading-relaxed">
+            <p className="text-white/80 max-w-sm text-lg font-light leading-relaxed">
               Turning complex ideas into scalable digital products. We bridge the gap between vision and technical excellence.
             </p>
           </div>
 
+
           {/* Column 2: Quick Links */}
           <div className="footer-col flex flex-col gap-8">
-            <h4 className="text-primary font-mono text-[10px] tracking-[0.4em] uppercase font-bold opacity-70">
+            <h3 className="text-primary font-mono text-[10px] tracking-[0.4em] uppercase font-bold opacity-70">
               NAVIGATION
-            </h4>
+            </h3>
+
             <ul className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <li key={link.name}>
                   <Link 
                     href={link.href}
-                    className="text-foreground/60 hover:text-white transition-colors font-light tracking-wide text-sm"
+                    className="text-white/70 hover:text-white transition-colors font-light tracking-wide text-sm"
                   >
                     {link.name}
                   </Link>
                 </li>
               ))}
+
             </ul>
           </div>
 
           {/* Column 3: Socials */}
           <div className="footer-col flex flex-col gap-8">
-            <h4 className="text-primary font-mono text-[10px] tracking-[0.4em] uppercase font-bold opacity-70">
+            <h3 className="text-primary font-mono text-[10px] tracking-[0.4em] uppercase font-bold opacity-70">
               SOCIALS
-            </h4>
+            </h3>
+
             <div className="flex flex-wrap gap-4">
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.name}
                   href={social.href}
+                  aria-label={`Follow Arixon Labs on ${social.name}`}
                   whileHover={{ y: -5, scale: 1.1 }}
-                  className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-foreground/60 hover:text-primary hover:border-primary/50 hover:shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)] transition-all"
+                  className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-primary hover:border-primary/50 hover:shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)] transition-all"
                 >
                   {social.icon}
                 </motion.a>
               ))}
             </div>
+
           </div>
 
         </div>

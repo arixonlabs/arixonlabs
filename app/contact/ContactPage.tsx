@@ -1,64 +1,64 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import ContactSection from "@/components/features/ContactSection";
 import Link from "next/link";
-import { ArrowLeft, Mail, MessageCircle, MapPin, Clock } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
+
 
 export default function ContactPage() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Hero Animation
-      gsap.from(".contact-hero-content > *", {
-        y: 40,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 1,
-        ease: "power3.out"
-      });
+  useGSAP(() => {
+    // Hero Animation
+    gsap.from(".contact-hero-content > *", {
+      y: 40,
+      opacity: 0,
+      stagger: 0.15,
+      duration: 1,
+      ease: "power3.out"
+    });
 
-      // Parallax effect for background image
-      gsap.to(".contact-bg-image", {
-        yPercent: 15,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".contact-hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: true
-        }
-      });
+    // Parallax effect for background image
+    gsap.to(".contact-bg-image", {
+      yPercent: 15,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".contact-hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      }
+    });
 
-      // Ambient light pulse
-      gsap.to(".ambient-glow", {
-        opacity: 0.6,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut"
-      });
-    }, containerRef);
+    // Ambient light pulse
+    gsap.to(".ambient-glow", {
+      opacity: 0.6,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut"
+    });
+  }, { scope: containerRef });
 
-    return () => ctx.revert();
-  }, []);
 
   return (
     <main ref={containerRef} className="relative bg-background min-h-screen overflow-hidden">
       {/* Cinematic Background Image */}
       <div className="contact-bg-image absolute inset-0 z-0 opacity-80">
         <Image 
-          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop"
           alt="Contact Background"
           fill
           className="object-cover"
           priority
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-linear-to-b from-background/10 via-background/60 to-background" />
         <div className="absolute inset-0 bg-linear-to-r from-background/40 via-transparent to-background/40" />

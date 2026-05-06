@@ -24,13 +24,13 @@ const Navbar = () => {
     <>
       <nav className="fixed top-0 left-0 w-full z-100 px-6 py-3">
         <div className="container mx-auto max-w-7xl">
-          <div className="flex items-center justify-between bg-background/60 backdrop-blur-md border border-white/5 rounded-full px-6 h-16 shadow-xl">
+          <div className="flex items-center justify-between bg-background/40 backdrop-blur-xl border border-white/10 rounded-full px-6 h-16 shadow-xl">
 
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center" aria-label="Arixon Labs Home">
               <div className="relative h-16 w-32 md:h-24 md:w-48 ml-[-20px] md:ml-[-45px]">
                 <Image
                   src="/assets/logo.png"
-                  alt="Arixon Labs"
+                  alt="Arixon Labs Logo"
                   fill
                   className="object-contain brightness-110 drop-shadow-2xl"
                   priority
@@ -39,7 +39,7 @@ const Navbar = () => {
             </Link>
 
             {/* Desktop Links - Tighter Spacing */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-8" role="navigation" aria-label="Main Navigation">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -57,6 +57,7 @@ const Navbar = () => {
               <Link
                 href="/contact"
                 className="hidden md:flex items-center gap-2 bg-primary px-5 py-2 rounded-full text-[10px] font-bold text-black hover:scale-105 transition-transform"
+                aria-label="Start a new project"
               >
                 START A PROJECT <ArrowRight className="w-3 h-3" />
               </Link>
@@ -65,14 +66,18 @@ const Navbar = () => {
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="md:hidden p-2 text-foreground z-101 pointer-events-auto relative"
+                aria-label={isOpen ? "Close Menu" : "Open Menu"}
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu"
               >
                 {isOpen ? (
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5" aria-hidden="true" />
                 ) : (
-                  <Menu className="w-5 h-5" />
+                  <Menu className="w-5 h-5" aria-hidden="true" />
                 )}
               </button>
             </div>
+
           </div>
         </div>
       </nav>
@@ -85,7 +90,9 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            id="mobile-menu"
             className="fixed inset-0 z-99 bg-background flex flex-col justify-center px-10 gap-8 md:hidden"
+
           >
             {navLinks.map((link, i) => (
               <motion.div

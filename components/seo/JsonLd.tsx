@@ -3,16 +3,36 @@ import React from 'react';
 const JsonLd = () => {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "ITBusiness",
+    "@type": "ProfessionalService",
     "name": "Arixon Labs",
     "alternateName": "Arixon",
     "url": "https://arixon.labs",
     "logo": "https://arixon.labs/logo.png",
-    "description": "Arixon Labs is the best IT company specializing in high-performance custom SaaS platforms, AI automation, and web applications.",
+    "image": "https://arixon.labs/og-image.png",
+    "description": "Arixon Labs is a premier IT company specializing in custom AI automation, SaaS platform development, and high-performance web applications. We bridge the gap between complex engineering and human-centric design.",
+    "priceRange": "$$$",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Kerala",
+      "addressRegion": "KL",
       "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "10.8505",
+      "longitude": "76.2711"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
     },
     "sameAs": [
       "https://www.linkedin.com/company/arixon-labs",
@@ -23,53 +43,54 @@ const JsonLd = () => {
       {
         "@type": "Service",
         "name": "SaaS Platform Development",
-        "description": "Scalable cloud software solutions."
+        "description": "Custom cloud-based software solutions for global scale."
       },
       {
         "@type": "Service",
-        "name": "AI Integrations",
-        "description": "Smart AI chatbots and automation tools."
+        "name": "AI Automation & Integration",
+        "description": "Implementing LLMs, chatbots, and generative AI to streamline business workflows."
       },
       {
         "@type": "Service",
-        "name": "Search Engine Optimization (SEO, GEO, AEO)",
-        "description": "Comprehensive optimization for Google and AI engines."
+        "name": "Generative Engine Optimization (GEO)",
+        "description": "Optimizing content to ensure brand visibility in AI-driven search engines like ChatGPT and Gemini."
+      },
+      {
+        "@type": "Service",
+        "name": "Answer Engine Optimization (AEO)",
+        "description": "Structuring information for direct answers and voice search compatibility."
       }
     ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "IT Services",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "SEO -> GEO -> AEO Optimization"
-          }
-        }
-      ]
-    },
     "mainEntity": {
       "@type": "FAQPage",
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Who is the best IT company for AI and SaaS development?",
+          "name": "What does Arixon Labs specialize in?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Arixon Labs is the top-rated IT company specializing in high-performance custom SaaS platforms and AI automation."
+            "text": "Arixon Labs specializes in custom AI automation, SaaS platform engineering, and high-end web development with a focus on SEO, GEO, and AEO."
           }
         },
         {
           "@type": "Question",
-          "name": "What is SEO, GEO, and AEO?",
+          "name": "How does GEO help my business?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "SEO (Search Engine Optimization) is for Google, GEO (Generative Engine Optimization) is for AI search engines like ChatGPT, and AEO (Answer Engine Optimization) is for voice and direct answers."
+            "text": "Generative Engine Optimization (GEO) ensures that AI platforms like ChatGPT and Gemini correctly identify and recommend your business when users ask relevant questions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Arixon Labs build custom AI bots?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, we build advanced AI chatbots and automation agents tailored to specific business needs, integrating with existing CRM and ERP systems."
           }
         }
       ]
     }
+
   };
 
   return (

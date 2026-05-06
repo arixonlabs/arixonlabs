@@ -87,15 +87,16 @@ export default function ContactSection() {
     <section 
       ref={containerRef}
       id="contact" 
-      className="relative z-20 py-32 md:py-48 bg-background text-foreground px-6 overflow-hidden perspective-1000"
+      className="relative z-20 pt-16 pb-32 md:pt-24 md:pb-48 bg-background text-foreground px-6 overflow-hidden perspective-1000"
     >
       {/* Cinematic Background Image */}
       <div className="absolute inset-0 z-0 opacity-[0.15]">
         <Image 
-          src="https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?q=80&w=2071&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1516339901601-2e1b62dc0c45?q=80&w=1200&auto=format&fit=crop"
           alt="Contact Background"
           fill
           className="object-cover brightness-50"
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-linear-to-b from-background via-transparent to-background" />
       </div>
@@ -128,20 +129,20 @@ export default function ContactSection() {
             </div>
 
             <div className="flex flex-col gap-6">
-              <p className="text-foreground/50 max-w-md text-base md:text-lg font-light leading-relaxed">
+              <p className="text-white/80 max-w-md text-base md:text-lg font-light leading-relaxed">
                 Whether you have a fully-formed idea or just a spark of inspiration, we're here to turn it into a digital masterpiece.
               </p>
               
               <div className="flex flex-wrap gap-8 mt-4">
-                <a href="mailto:contact.arixon@gmail.com" className="group flex items-center gap-3 text-sm font-mono tracking-widest hover:text-primary transition-colors">
-                  <Mail className="w-5 h-5 text-primary" />
+                <a href="mailto:contact.arixon@gmail.com" aria-label="Send an email to Arixon Labs" className="group flex items-center gap-3 text-sm font-mono tracking-widest hover:text-primary transition-colors text-white/90">
+                  <Mail className="w-5 h-5 text-primary" aria-hidden="true" />
                   EMAIL US
-                  <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all -translate-y-1" />
+                  <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all -translate-y-1" aria-hidden="true" />
                 </a>
-                <a href="https://wa.me/917994010513" target="_blank" className="group flex items-center gap-3 text-sm font-mono tracking-widest hover:text-[#25D366] transition-colors">
-                  <MessageCircle className="w-5 h-5 text-[#25D366]" />
+                <a href="https://wa.me/917994010513" target="_blank" aria-label="Chat with Arixon Labs on WhatsApp" className="group flex items-center gap-3 text-sm font-mono tracking-widest hover:text-[#25D366] transition-colors text-white/90">
+                  <MessageCircle className="w-5 h-5 text-[#25D366]" aria-hidden="true" />
                   WHATSAPP
-                  <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all -translate-y-1" />
+                  <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all -translate-y-1" aria-hidden="true" />
                 </a>
               </div>
             </div>
@@ -156,7 +157,7 @@ export default function ContactSection() {
           >
             <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full" />
             <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 rounded-[2rem] shadow-2xl overflow-hidden">
-              <AnimatePresence mode="wait">
+               <AnimatePresence mode="wait">
                 {!isSubmitted ? (
                   <motion.form 
                     key="form"
@@ -168,9 +169,11 @@ export default function ContactSection() {
                   >
                     <div className="grid md:grid-cols-2 gap-8">
                       <div className="flex flex-col gap-3">
-                        <label className="text-[10px] font-mono tracking-[0.3em] text-primary uppercase font-bold">Your Name</label>
+                        <label htmlFor="name" className="text-[10px] font-mono tracking-[0.3em] text-primary uppercase font-bold">Your Name</label>
                         <motion.input 
                           whileFocus={{ scale: 1.02 }}
+                          id="name"
+                          name="name"
                           type="text" 
                           required
                           placeholder="Your Name"
@@ -180,9 +183,11 @@ export default function ContactSection() {
                         />
                       </div>
                       <div className="flex flex-col gap-3">
-                        <label className="text-[10px] font-mono tracking-[0.3em] text-primary uppercase font-bold">Email Or Phone Number</label>
+                        <label htmlFor="email" className="text-[10px] font-mono tracking-[0.3em] text-primary uppercase font-bold">Email Or Phone</label>
                         <motion.input 
                           whileFocus={{ scale: 1.02 }}
+                          id="email"
+                          name="email"
                           type="text" 
                           required
                           placeholder="Email Address Or Phone Number"
@@ -194,9 +199,11 @@ export default function ContactSection() {
                     </div>
 
                     <div className="flex flex-col gap-3">
-                      <label className="text-[10px] font-mono tracking-[0.3em] text-primary uppercase font-bold">Project Brief</label>
+                      <label htmlFor="message" className="text-[10px] font-mono tracking-[0.3em] text-primary uppercase font-bold">Project Brief</label>
                       <motion.textarea 
                         whileFocus={{ scale: 1.01 }}
+                        id="message"
+                        name="message"
                         rows={4}
                         required
                         placeholder="Tell us about your idea"
@@ -208,10 +215,11 @@ export default function ContactSection() {
 
                     <button 
                       type="submit"
+                      aria-label="Send your message via WhatsApp"
                       className="group relative flex items-center justify-center bg-white text-black h-16 rounded-xl font-bold tracking-[0.2em] text-xs hover:bg-primary transition-all active:scale-95 overflow-hidden"
                     >
                       <span className="relative z-10 flex items-center gap-3">
-                        SEND MESSAGE <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        SEND MESSAGE <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" aria-hidden="true" />
                       </span>
                     </button>
                   </motion.form>
@@ -222,6 +230,7 @@ export default function ContactSection() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="flex flex-col items-center justify-center py-12 text-center gap-6"
                   >
+
                     <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center">
                       <CheckCircle2 className="w-10 h-10 text-primary animate-pulse" />
                     </div>

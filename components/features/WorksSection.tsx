@@ -1,42 +1,43 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useRef } from "react";
 import gsap from "gsap";
 import Image from "next/image";
-import { ArrowUpRight, MessageSquare } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { useGSAP } from "@gsap/react";
+
 
 const works = [
   {
     title: "Arixon SaaS Dashboard",
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "E-commerce AI Bot",
     image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "Enterprise ERP",
     image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
   },
   {
     title: "FinTech App",
     image:
-      "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&q=80",
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800",
   },
   {
     title: "Cloud Portal",
     image:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&q=80",
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800",
   },
   {
     title: "Smart Logistics",
     image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&q=80",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800",
   },
 ];
 
@@ -46,10 +47,11 @@ const WorksSection = () => {
   const marqueeRef2 = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     const setupMarquee = (
       ref: React.RefObject<HTMLDivElement | null>,
       direction: number,
+      duration: number
     ) => {
       if (!ref.current) return;
       const element = ref.current;
@@ -58,19 +60,34 @@ const WorksSection = () => {
         gsap.fromTo(
           element,
           { x: "0%" },
-          { x: "-50%", duration: 60, ease: "none", repeat: -1 },
+          { x: "-50%", duration: duration, ease: "none", repeat: -1 },
         );
       } else {
         gsap.fromTo(
           element,
           { x: "-50%" },
-          { x: "0%", duration: 80, ease: "none", repeat: -1 },
+          { x: "0%", duration: duration, ease: "none", repeat: -1 },
         );
+
       }
     };
 
-    setupMarquee(marqueeRef1, 1);
-    setupMarquee(marqueeRef2, -1);
+    const mm = gsap.matchMedia();
+    
+    mm.add("(min-width: 768px)", () => {
+      setupMarquee(marqueeRef1, 1, 20); // Faster desktop speed
+      setupMarquee(marqueeRef2, -1, 40);
+    });
+
+
+    mm.add("(max-width: 767px)", () => {
+      // Balanced speed for mobile (faster than before but still optimized)
+      setupMarquee(marqueeRef1, 1, 60);
+      setupMarquee(marqueeRef2, -1, 75);
+    });
+
+
+
 
     // Staggered Text Animation
     if (textRef.current) {
@@ -78,26 +95,25 @@ const WorksSection = () => {
       gsap.fromTo(
         children,
         {
-          y: 60,
+          y: 30,
           opacity: 0,
-          rotateX: -15,
         },
         {
           y: 0,
           opacity: 1,
-          rotateX: 0,
-          duration: 1.2,
-          stagger: 0.2,
-          ease: "power4.out",
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: textRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse",
+            start: "top 90%",
+            toggleActions: "play none none none",
           },
         },
       );
+
     }
-  }, []);
+  }, { scope: containerRef });
 
   return (
     <section
@@ -120,6 +136,7 @@ const WorksSection = () => {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="(max-width: 768px) 200px, 320px"
               />
             </div>
           ))}
@@ -138,6 +155,7 @@ const WorksSection = () => {
                 fill
                 className="object-cover"
                 loading="lazy"
+                sizes="(max-width: 768px) 200px, 320px"
               />
             </div>
           ))}
@@ -159,6 +177,7 @@ const WorksSection = () => {
           </h2>
           <Link
             href="/works"
+            aria-label="View all portfolio projects"
             className="group hover:bg-blue-500 hover:text-white inline-flex items-center gap-1.5 bg-white text-black px-6 py-3 rounded-full font-bold text-[10px] md:text-sm tracking-widest hover:scale-105 transition-all shadow-[0_0_40px_rgba(255,255,255,0.1)]"
           >
             VIEW ALL WORKS

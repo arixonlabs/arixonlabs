@@ -1,7 +1,9 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import gsap from "gsap";
+
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ArrowUpRight } from "lucide-react";
@@ -16,7 +18,7 @@ const services = [
     headline: "All-in-One Software for Your Business",
     desc: "We provide scalable cloud software solutions to help your business grow effortlessly. Our platforms are easy to use, secure, and highly reliable.",
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
   },
   {
     id: "02",
@@ -24,7 +26,7 @@ const services = [
     headline: "Software Built Just for You",
     desc: "We build customized software to automate your unique business workflows and eliminate manual errors. Everything is designed to be fast, simple, and efficient.",
     image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
   },
   {
     id: "03",
@@ -32,7 +34,7 @@ const services = [
     headline: "Smart AI for Smarter Work",
     desc: "Automate your daily tasks using smart chatbots and advanced AI tools. Focus on what matters most while technology handles the repetitive work.",
     image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200",
   },
   {
     id: "04",
@@ -40,7 +42,7 @@ const services = [
     headline: "Fast Websites that Get You Clients",
     desc: "We build high-speed, SEO-optimized websites that rank higher on Google. Turn your visitors into loyal customers with a premium digital experience.",
     image:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1200",
   },
   {
     id: "05",
@@ -48,7 +50,7 @@ const services = [
     headline: "Modern Apps for Your Customers",
     desc: "Premium mobile applications that work seamlessly on both iOS and Android. We focus on simple design and a smooth experience for your users.",
     image:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=1200",
   },
   {
     id: "06",
@@ -56,7 +58,7 @@ const services = [
     headline: "SEO -> GEO -> AEO",
     desc: "As the best IT company for search visibility, we ensure your brand dominates search results across Google (SEO), AI Engines (GEO), and Voice platforms (AEO).",
     image:
-      "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&q=80&w=1200",
   },
   {
     id: "07",
@@ -64,7 +66,7 @@ const services = [
     headline: "Build a Strong Brand Online",
     desc: "High-end digital portfolios designed to boost your brand value and credibility. Stand out from your competitors with a polished, professional look.",
     image:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200",
   },
 ];
 
@@ -116,31 +118,23 @@ const ServicesSection = () => {
     });
 
     mm.add("(max-width: 767px)", () => {
-      cards.forEach((card: any) => {
-        gsap.fromTo(card,
-          { opacity: 0, y: 50, scale: 0.95 },
-          {
-            opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power2.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
+      // Mobile: Extremely lightweight entrance to save TBT
+      gsap.fromTo(".service-card", 
+        { opacity: 0.1, y: 30 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          stagger: 0.1,
+          duration: 0.6,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            toggleActions: "play none none none",
           }
-        );
-      });
-
-      gsap.to(".tech-grid", {
-        backgroundPositionY: "100px",
-        ease: "none",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+        }
+      );
     });
+
 
     ScrollTrigger.refresh();
   }, { scope: containerRef });
@@ -172,7 +166,13 @@ const ServicesSection = () => {
             >
               <div className="container mx-auto grid md:grid-cols-2 gap-8 items-center max-w-6xl">
                 <div className={`service-image-wrapper relative aspect-video md:aspect-16/10 overflow-hidden rounded-xl border border-white/10 shadow-2xl will-change-transform ${i % 2 === 1 ? "md:order-2" : ""}`}>
-                  <Image src={s.image} fill alt={s.title} className="object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" />
+                  <Image 
+                    src={s.image} 
+                    fill 
+                    alt={s.title} 
+                    className="object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                   <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent" />
                   <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between pointer-events-none">
                     <div className="flex justify-between items-start">
@@ -197,14 +197,18 @@ const ServicesSection = () => {
                       <span className="text-primary italic font-light">{s.headline.split(" ").slice(-1)}</span>
                     </h2>
                   </div>
-                  <p className="text-sm md:text-base text-foreground/50 font-light leading-relaxed max-w-xs">{s.desc}</p>
+                  <p className="text-sm md:text-base text-foreground/80 font-light leading-relaxed max-w-xs">{s.desc}</p>
                   <div className="flex flex-wrap items-center gap-6 mt-2 group cursor-pointer w-fit">
-                    <button className="px-6 py-3 bg-primary text-black text-xs font-bold tracking-tight rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)] active:scale-95">INITIALIZE</button>
-                    <div className="flex items-center gap-2 text-primary font-mono text-[10px] tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">
+                    <Link 
+                      href="/contact"
+                      aria-label={`Get in touch about ${s.title}`}
+                      className="group  hover:text-white inline-flex items-center gap-1 text-blue-600 px-3 py-2 rounded-full font-bold text-[10px] md:text-sm tracking-widest hover:scale-105 transition-all"
+                    >
                       <span>INFO</span>
-                      <ArrowUpRight className="w-4 h-4" />
-                    </div>
+                      <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" aria-hidden="true" />
+                    </Link>
                   </div>
+
                 </div>
               </div>
             </div>

@@ -69,7 +69,9 @@ const HeroSection = () => {
     });
 
     mm.add("(max-width: 767px)", () => {
-      // Mobile: Simple scroll reveal without heavy pinning
+      // Mobile: Instant visibility for LCP, simple scroll reveal
+      gsap.set([bgImageRef.current, textRef.current], { opacity: 1, visibility: "visible" });
+      
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -82,28 +84,15 @@ const HeroSection = () => {
 
       tl.to(bgImageRef.current, {
         opacity: 0.3,
-        scale: 1.2,
-        filter: "blur(1px)",
+        scale: 1.1,
       }, 0);
 
       tl.to(textRef.current, {
         opacity: 0,
-        y: -50,
+        y: -30,
       }, 0);
-
-      const q = gsap.utils.selector(portalContentRef.current);
-      tl.fromTo(q("div > *"),
-        { autoAlpha: 0, y: 20 },
-        { autoAlpha: 1, y: 0, duration: 1, stagger: 0.1 },
-        0.2
-      );
-
-      tl.fromTo(portalContentRef.current,
-        { autoAlpha: 0 },
-        { autoAlpha: 1 },
-        0.2
-      );
     });
+
 
     // Refresh ScrollTrigger after a short delay to ensure layout is ready
     ScrollTrigger.refresh();
@@ -121,28 +110,33 @@ const HeroSection = () => {
       >
         <Image
           fill
-          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
-          alt="Primary Background"
+          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop"
+          alt="Arixon Labs Hero Background"
           className="w-full h-full object-cover brightness-[0.6]"
           priority
+          fetchPriority="high"
+          sizes="100vw"
         />
+
         <div className="absolute inset-0 bg-linear-to-b from-background/80 via-transparent to-background" />
       </div>
 
-      {/* 2. Portal Background Layer */}
+      {/* 2. Portal Background Layer - Only visible on Desktop for performance */}
       <div
         ref={portalImageRef}
-        className="absolute inset-0 z-0 h-full w-full pointer-events-none will-change-transform"
+        className="absolute inset-0 z-0 h-full w-full pointer-events-none will-change-transform hidden md:block"
       >
         <Image
           fill
           src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
-          alt="Technical Portal Background"
+          alt=""
           className="w-full h-full object-cover"
           priority
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-linear-to-b from-background/50 via-transparent to-background" />
       </div>
+
 
       {/* 3. Portal Side Content */}
       <div 
@@ -156,6 +150,7 @@ const HeroSection = () => {
             Built for scale. <br /> Designed for performance.
           </p>
         </div>
+
 
         {/* Center Section (Apple/Tesla Style) */}
         <div className="hidden lg:flex flex-col items-center gap-16 text-center">
@@ -190,7 +185,11 @@ const HeroSection = () => {
           ARIXON <span className="text-primary italic font-light tracking-normal">LABS</span>
         </h1>
         <h2 className="sr-only">Best IT Company for Custom AI & SaaS Development</h2>
-        <p className="text-base md:text-2xl text-foreground/70 max-w-3xl mx-auto font-light leading-relaxed tracking-tight">
+        <div className="sr-only">
+          Arixon Labs is a top-rated IT agency specializing in engineering high-performance custom SaaS platforms and AI automation. 
+          We provide scalable digital solutions for global startups and enterprises, bridging concept and digital reality with precision engineering.
+        </div>
+        <p className="text-base md:text-2xl text-foreground/90 max-w-3xl mx-auto font-light leading-relaxed tracking-tight">
           Engineering high-performance software <br className="hidden md:block" /> for the next generation of business.
         </p>
       </div>
