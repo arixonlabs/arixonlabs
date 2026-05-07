@@ -19,17 +19,35 @@ export default function PerformanceManager() {
     }
 
     // 2. Global ScrollTrigger Optimization
-    // Only refresh when absolutely necessary
     ScrollTrigger.config({
       limitCallbacks: true,
-      ignoreMobileResize: true, // Prevents layout recalculations on mobile address bar hide/show
+      ignoreMobileResize: true,
+      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,resize", // Refresh on all major events
     });
 
-    // 3. Cleanup unused GSAP instances on navigation
-    return () => {
-      ScrollTrigger.getAll().forEach(st => st.kill());
-      gsap.ticker.fps(60); // Reset for desktop
+    // 3. Normalize Scroll (Industrial Strength Fix)
+    // This forces the browser to sync all scroll events, preventing "stuck" sections
+    ScrollTrigger.normalizeScroll(true);
+
+
+    // 3. Force refresh on full load to prevent "stuck" scroll
+    const handleLoad = () => {
+      ScrollTrigger.refresh();
     };
+
+    window.addEventListener("load", handleLoad);
+    
+    // Refresh after a short delay as a fallback for dynamic images
+    const timeout = setTimeout(() => ScrollTrigger.refresh(), 2000);
+
+    // 4. Cleanup
+    return () => {
+      window.removeEventListener("load", handleLoad);
+      clearTimeout(timeout);
+      ScrollTrigger.getAll().forEach(st => st.kill());
+      gsap.ticker.fps(60);
+    };
+
   }, []);
 
   return null;

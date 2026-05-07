@@ -147,7 +147,7 @@ const FaqSection = () => {
     <section
       ref={containerRef}
       id="faq"
-      className="relative z-0 isolate bg-background overflow-hidden pt-12 pb-32 px-6"
+      className="relative z-40 isolate bg-background overflow-hidden pt-12 pb-32 px-6"
     >
       {/* Cinematic Background Elements */}
       <div className="faq-grid absolute inset-0 pointer-events-none opacity-5">

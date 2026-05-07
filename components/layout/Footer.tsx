@@ -9,12 +9,14 @@ import { ArrowUp } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { useLenis } from "lenis/react";
 
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
 const Footer = () => {
   const footerRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
+  const lenis = useLenis();
 
   useEffect(() => {
     // Refresh ScrollTrigger when pathname changes to ensure correct heights
@@ -55,7 +57,11 @@ const Footer = () => {
   }, []);
 
   const scrollToTop = () => {
-    gsap.to(window, { duration: 1.5, scrollTo: 0, ease: "power4.inOut" });
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const navLinks = [
@@ -88,17 +94,18 @@ const Footer = () => {
   ];
 
   return (
-    <footer ref={footerRef} className="relative z-30 bg-[#020617] border-t border-white/5 pt-16 pb-8 px-6 overflow-hidden">
+    <footer ref={footerRef} className="relative z-60 bg-[#020617] border-t border-white/5 pt-16 pb-8 px-6">
       {/* Cinematic Background Watermark */}
       <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-[0.02]">
-        <div className="text-[20vw] font-black tracking-tighter select-none">
+        <div className="text-[20vw] font-black tracking-tighter select-none pointer-events-none">
           ARIXON
         </div>
       </div>
 
 
       {/* Cinematic Glow Overlay */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-linear-to-r from-transparent via-primary/20 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-linear-to-r from-transparent via-primary/20 to-transparent pointer-events-none" />
+
       <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
       
       <div className="container mx-auto max-w-7xl relative z-10">
@@ -118,7 +125,6 @@ const Footer = () => {
               Turning complex ideas into scalable digital products. We bridge the gap between vision and technical excellence.
             </p>
           </div>
-
 
           {/* Column 2: Quick Links */}
           <div className="footer-col flex flex-col gap-8">

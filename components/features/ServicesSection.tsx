@@ -85,7 +85,7 @@ const ServicesSection = () => {
         scrollTrigger: {
           trigger: triggerRef.current,
           start: "top top",
-          end: "+=1300%",
+          end: `+=${services.length * 150}%`,
           pin: true,
           scrub: 0.5,
           anticipatePin: 1,
@@ -143,7 +143,7 @@ const ServicesSection = () => {
     <section
       ref={containerRef}
       id="services"
-      className="relative bg-background overflow-hidden py-12 md:py-0 transition-colors duration-500"
+      className="relative z-20 bg-background overflow-hidden py-12 md:py-0 transition-colors duration-500"
     >
       <div ref={triggerRef} className="relative md:h-screen w-full">
         <div className="tech-grid absolute inset-0 pointer-events-none opacity-10">
@@ -175,6 +175,7 @@ const ServicesSection = () => {
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent" />
                   <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between pointer-events-none">
+
                     <div className="flex justify-between items-start">
                       <span className="text-primary font-mono text-[8px] tracking-widest uppercase">MODULE-{s.id}</span>
                       <div className="w-5 h-5 border-t border-r border-primary/30" />

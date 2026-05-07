@@ -87,7 +87,7 @@ export default function ContactSection() {
     <section 
       ref={containerRef}
       id="contact" 
-      className="relative z-20 pt-16 pb-32 md:pt-24 md:pb-48 bg-background text-foreground px-6 overflow-hidden perspective-1000"
+      className="relative z-50 pt-16 pb-32 md:pt-24 md:pb-48 bg-background text-foreground px-6 overflow-hidden"
     >
       {/* Cinematic Background Image */}
       <div className="absolute inset-0 z-0 opacity-[0.15]">

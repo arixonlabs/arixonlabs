@@ -120,7 +120,7 @@ const WorksSection = () => {
     <section
       ref={containerRef}
       id="projects"
-      className="relative h-[90vh]  w-full bg-background overflow-hidden flex items-center justify-center"
+      className="relative z-30 h-[90vh]  w-full bg-background overflow-hidden flex items-center justify-center"
     >
       {/* Background Marquee Layer */}
       <div className="absolute inset-0 z-0 flex flex-col justify-center gap-6 pointer-events-none">

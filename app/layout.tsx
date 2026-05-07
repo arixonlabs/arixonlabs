@@ -106,6 +106,7 @@ export default function RootLayout({
           <Footer />
         </SmoothScroll>
       </body>
+
     </html>
   );
 }

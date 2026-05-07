@@ -116,6 +116,7 @@
 html, body {
   width: 100%;
   overflow-x: hidden;
+  overscroll-behavior: none;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
