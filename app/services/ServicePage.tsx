@@ -87,6 +87,7 @@ export default function ServicePage() {
             fill
             className="object-cover"
             priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-linear-to-b from-background/0 via-background/60 to-background" />
           <div className="absolute inset-0 bg-linear-to-r from-background via-transparent to-background/20" />

@@ -3,51 +3,51 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { usePathname } from "next/navigation";
 
 export default function PerformanceManager() {
+  const pathname = usePathname();
+
+  // Force ScrollTrigger to refresh whenever the URL changes
+  // This is critical for Next.js app router navigation smoothness
   useEffect(() => {
-    // 1. Aggressive TBT Reduction for Mobile
-    const isMobile = window.innerWidth < 768;
+    // Small delay to allow the new page content to mount
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
-    if (isMobile) {
-      // Lower GSAP ticker frequency on mobile to save CPU/Battery
-      // 30fps is plenty for mobile scroll animations and drastically reduces TBT
-      gsap.ticker.fps(30);
-      
-      // Lag smoothing prevents long frames from causing huge jumps/blocking
-      gsap.ticker.lagSmoothing(1000, 16);
-    }
-
+  useEffect(() => {
+    // 1. Restore high-performance ticker (default 60fps+)
+    gsap.ticker.lagSmoothing(1000, 16);
+    
     // 2. Global ScrollTrigger Optimization
+    // IMPORTANT: normalizeScroll(true) is REMOVED as it conflicts with Lenis
     ScrollTrigger.config({
       limitCallbacks: true,
       ignoreMobileResize: true,
-      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,resize", // Refresh on all major events
+      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,resize", 
     });
 
-    // 3. Normalize Scroll (Industrial Strength Fix)
-    // This forces the browser to sync all scroll events, preventing "stuck" sections
-    ScrollTrigger.normalizeScroll(true);
-
-
-    // 3. Force refresh on full load to prevent "stuck" scroll
-    const handleLoad = () => {
+    // 3. Robust Refresh Logic
+    // This handles the "Ctrl+Shift+R" issue by ensuring everything refreshes after content loads
+    const refreshAll = () => {
       ScrollTrigger.refresh();
     };
 
-    window.addEventListener("load", handleLoad);
+    window.addEventListener("load", refreshAll);
     
-    // Refresh after a short delay as a fallback for dynamic images
-    const timeout = setTimeout(() => ScrollTrigger.refresh(), 2000);
+    // Multiple refresh heartbeats to catch late-loading images/fonts
+    const timer1 = setTimeout(refreshAll, 500);
+    const timer2 = setTimeout(refreshAll, 2000);
 
     // 4. Cleanup
     return () => {
-      window.removeEventListener("load", handleLoad);
-      clearTimeout(timeout);
-      ScrollTrigger.getAll().forEach(st => st.kill());
-      gsap.ticker.fps(60);
+      window.removeEventListener("load", refreshAll);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
     };
-
   }, []);
 
   return null;

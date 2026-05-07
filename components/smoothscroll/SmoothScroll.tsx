@@ -30,14 +30,19 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   }, [lenis]);
 
   return (
-    <ReactLenis root options={{ 
-      lerp: 0.1, 
-      duration: 1.2, 
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      infinite: false,
-    }}>
+    <ReactLenis 
+      root 
+      autoRaf={false} 
+      options={{ 
+        lerp: 0.1, 
+        duration: 1.2, 
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+        syncTouch: true, // Better trackpad/mobile support
+        infinite: false,
+      }}
+    >
       {children as any}
     </ReactLenis>
   );

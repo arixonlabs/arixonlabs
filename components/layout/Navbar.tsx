@@ -34,6 +34,7 @@ const Navbar = () => {
                   fill
                   className="object-contain brightness-110 drop-shadow-2xl"
                   priority
+                  sizes="(max-width: 768px) 128px, 192px"
                 />
               </div>
             </Link>

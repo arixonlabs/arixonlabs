@@ -153,6 +153,7 @@ export default function WorksPage() {
                   fill
                   className="work-image object-cover will-change-transform"
                   loading="lazy"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
 

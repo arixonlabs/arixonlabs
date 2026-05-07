@@ -119,6 +119,7 @@ const Footer = () => {
                 alt="Arixon Labs Logo" 
                 fill 
                 className="object-contain brightness-110" 
+                sizes="(max-width: 768px) 128px, 128px"
               />
             </Link>
             <p className="text-white/80 max-w-sm text-lg font-light leading-relaxed">
