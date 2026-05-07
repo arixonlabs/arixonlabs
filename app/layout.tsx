@@ -98,6 +98,11 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground overflow-x-hidden">
+        {/* Global Premium Effects */}
+        <div className="noise-bg" aria-hidden="true" />
+        <div className="ambient-light-leak top-[-20%] left-[-20%] opacity-10" aria-hidden="true" />
+        <div className="ambient-light-leak bottom-[-20%] right-[-20%] opacity-5" aria-hidden="true" />
+        
         <JsonLd />
         <PerformanceManager />
         <Navbar />
