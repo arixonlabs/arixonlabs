@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { heroCards as CARDS } from "@/constant/constant";
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 // Simplified Premium Counter Component that counts up smoothly and naturally
