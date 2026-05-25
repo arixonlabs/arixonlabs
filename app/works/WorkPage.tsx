@@ -8,59 +8,9 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { allProjects } from "@/constant/constant";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const allProjects = [
-  {
-    id: 1,
-    title: "Arixon SaaS Dashboard",
-    category: "All-in-One Business Software",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2000",
-    link: "#",
-  },
-  {
-    id: 2,
-    title: "E-commerce AI Bot",
-    category: "Smart AI Tools",
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=2000",
-    link: "#",
-  },
-  {
-    id: 3,
-    title: "Enterprise ERP",
-    category: "Custom Built Software",
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000",
-    link: "#",
-  },
-  {
-    id: 4,
-    title: "FinTech Mobile App",
-    category: "Modern Mobile Apps",
-    image:
-      "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=2000",
-    link: "#",
-  },
-  {
-    id: 5,
-    title: "Smart Logistics System",
-    category: "Smart AI Automation",
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200&q=80",
-    link: "#",
-  },
-  {
-    id: 6,
-    title: "Healthcare SaaS Architecture",
-    category: "Business Software Solutions",
-    image:
-      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80",
-    link: "#",
-  },
-];
 
 export default function WorksPage() {
   const containerRef = useRef<HTMLDivElement>(null);

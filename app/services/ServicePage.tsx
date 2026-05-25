@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, Cpu, Globe, Rocket, ShieldCheck } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { serviceStats } from "@/constant/constant";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,28 +53,12 @@ export default function ServicePage() {
     return () => ctx.revert();
   }, []);
 
-  const stats = [
-    {
-      icon: <Rocket className="w-5 h-5" />,
-      label: "Innovation Led",
-      desc: "Cutting-edge tech stack",
-    },
-    {
-      icon: <Globe className="w-5 h-5" />,
-      label: "Global Standard",
-      desc: "Scalable architectures",
-    },
-    {
-      icon: <ShieldCheck className="w-5 h-5" />,
-      label: "Secure by Design",
-      desc: "Enterprise-grade safety",
-    },
-    {
-      icon: <Cpu className="w-5 h-5" />,
-      label: "High Performance",
-      desc: "Optimized user experience",
-    },
-  ];
+  const iconMap: Record<string, React.ReactNode> = {
+    Rocket: <Rocket className="w-5 h-5" />,
+    Globe: <Globe className="w-5 h-5" />,
+    ShieldCheck: <ShieldCheck className="w-5 h-5" />,
+    Cpu: <Cpu className="w-5 h-5" />,
+  };
 
   return (
     <main ref={containerRef} className="relative bg-background min-h-screen">
@@ -118,13 +103,13 @@ export default function ServicePage() {
             </p>
 
             <div className="stats-grid grid grid-cols-2 md:grid-cols-4 gap-8 mt-12 pt-12 border-t border-white/10 w-full">
-              {stats.map((stat, i) => (
+              {serviceStats.map((stat, i) => (
                 <div
                   key={i}
                   className="stat-card flex flex-col items-center text-center gap-3 p-4 rounded-2xl hover:bg-white/5 transition-all group cursor-default"
                 >
                   <div className="text-primary group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500">
-                    {stat.icon}
+                    {iconMap[stat.iconName]}
                   </div>
                   <h4 className="text-white font-bold text-sm tracking-tight uppercase font-mono">
                     {stat.label}
@@ -140,7 +125,7 @@ export default function ServicePage() {
       </section>
 
       {/* 2. Main Services Stack (Imported Section) */}
-      <div className="relative border-y border-white/5 bg-white/5">
+      <div className="relative">
         <ServicesSection />
       </div>
     </main>

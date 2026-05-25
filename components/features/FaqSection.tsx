@@ -6,36 +6,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ChevronDown, X } from "lucide-react";
 
+import { faqs } from "@/constant/constant";
+
 gsap.registerPlugin(ScrollTrigger);
 
-const faqs = [
-  {
-    question:
-      "Why is Arixon Labs considered the best IT company for SaaS development?",
-    answer:
-      "Arixon Labs is recognized as a top IT company because we don't just build software; we engineer scalable SaaS platforms with high-performance architectures. Our development process integrates SEO, GEO, and AEO from day one, ensuring your product is ready for both human users and AI search engines.",
-  },
-  {
-    question: "How does AI automation benefit my business?",
-    answer:
-      "AI automation streamlines repetitive workflows, reduces human error, and provides 24/7 customer engagement through intelligent agents. Arixon Labs specializes in custom AI integrations that help businesses scale without proportionally increasing operational costs.",
-  },
-  {
-    question: "What are SEO, GEO, and AEO, and why do they matter?",
-    answer:
-      "SEO (Search Engine Optimization) is for Google ranking. GEO (Generative Engine Optimization) ensures AI tools like ChatGPT recommend you. AEO (Answer Engine Optimization) optimizes for voice search and direct answers. Together, they form a complete visibility strategy for the modern digital era.",
-  },
-  {
-    question: "Can Arixon Labs help startups with limited technical knowledge?",
-    answer:
-      "Absolutely. As a leading IT agency, we act as your technical partner. We handle everything from concept and design to deployment and scaling, allowing you to focus on business growth while we manage the complex engineering.",
-  },
-  {
-    question: "What technologies does Arixon Labs use for web development?",
-    answer:
-      "We use cutting-edge technologies like Next.js, React, Node.js, and advanced AI frameworks. This ensures your website is fast, secure, and future-proof, meeting the high standards required by global enterprises.",
-  },
-];
 
 const FaqSection = () => {
   const containerRef = useRef<HTMLElement>(null);

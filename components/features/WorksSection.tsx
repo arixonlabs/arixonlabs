@@ -8,38 +8,7 @@ import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 
 
-const works = [
-  {
-    title: "Arixon SaaS Dashboard",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
-  },
-  {
-    title: "E-commerce AI Bot",
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
-  },
-  {
-    title: "Enterprise ERP",
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
-  },
-  {
-    title: "FinTech App",
-    image:
-      "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800",
-  },
-  {
-    title: "Cloud Portal",
-    image:
-      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800",
-  },
-  {
-    title: "Smart Logistics",
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800",
-  },
-];
+import { works } from "@/constant/constant";
 
 const WorksSection = () => {
   const containerRef = useRef<HTMLElement>(null);
@@ -129,7 +98,7 @@ const WorksSection = () => {
           {[...works, ...works].map((work, i) => (
             <div
               key={`row1-${i}`}
-              className="relative shrink-0 w-[200px] h-[260px] md:w-[320px] md:h-[200px] mx-2 md:mx-4 rounded-xl md:rounded-2xl overflow-hidden border border-white/10"
+              className="relative shrink-0 w-50 h-65 md:w-[320px] md:h-50 mx-2 md:mx-4 rounded-xl md:rounded-2xl overflow-hidden border border-white/10"
             >
               <Image
                 src={work.image}
@@ -148,7 +117,7 @@ const WorksSection = () => {
           {[...works, ...works].map((work, i) => (
             <div
               key={`row2-${i}`}
-              className="relative shrink-0 w-[200px] h-[260px] md:w-[320px] md:h-[200px] mx-2 md:mx-4 rounded-xl md:rounded-2xl overflow-hidden border border-white/10"
+              className="relative shrink-0 w-50 h-65 md:w-[320px] md:h-50 mx-2 md:mx-4 rounded-xl md:rounded-2xl overflow-hidden border border-white/10"
             >
               <Image
                 src={work.image}

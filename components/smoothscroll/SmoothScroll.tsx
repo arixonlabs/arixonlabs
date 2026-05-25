@@ -9,18 +9,20 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenis = useLenis();
 
   useEffect(() => {
-    if (!lenis) return;
-    
-    // 1. Sync ScrollTrigger with Lenis
-    lenis.on("scroll", ScrollTrigger.update);
+    if (typeof window !== "undefined") {
+      window.history.scrollRestoration = "manual";
+    }
+  }, []);
 
-    // 2. Add GSAP ticker synchronization
-    // This is the industrial-strength way to sync GSAP and Lenis
+  useEffect(() => {
+    if (!lenis) return;
+    lenis.on("scroll", ScrollTrigger.update);
     const update = (time: number) => {
       lenis.raf(time * 1000);
     };
     
     gsap.ticker.add(update);
+    gsap.ticker.lagSmoothing(0); // This fixes backward scroll lag by disabling GSAP's built-in lag compensation
 
     // Clean up
     return () => {
@@ -34,8 +36,8 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       root 
       autoRaf={false} 
       options={{ 
-        lerp: 0.1, 
-        duration: 1.2, 
+        lerp: 0.05, 
+        duration: 1.5, 
         smoothWheel: true,
         wheelMultiplier: 1,
         touchMultiplier: 2,

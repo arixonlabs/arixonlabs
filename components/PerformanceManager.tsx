@@ -19,8 +19,8 @@ export default function PerformanceManager() {
   }, [pathname]);
 
   useEffect(() => {
-    // 1. Restore high-performance ticker (default 60fps+)
-    gsap.ticker.lagSmoothing(1000, 16);
+    // 1. Disable GSAP lag smoothing to keep it in sync with Lenis RAF updates
+    gsap.ticker.lagSmoothing(0);
     
     // 2. Global ScrollTrigger Optimization
     // IMPORTANT: normalizeScroll(true) is REMOVED as it conflicts with Lenis

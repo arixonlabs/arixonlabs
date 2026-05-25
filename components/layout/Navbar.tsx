@@ -2,31 +2,47 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Menu, X, ArrowRight } from "lucide-react";
 import Image from "next/image";
 
-gsap.registerPlugin(ScrollTrigger);
+import { useLenis } from "lenis/react";
+import { navbarLinks as navLinks } from "@/constant/constant";
 
-const navLinks = [
-  { name: "HOME", href: "/" },
-  { name: "SERVICES", href: "/services" },
-  { name: "WORK", href: "/works" },
-  { name: "CONTACT", href: "/contact" },
-];
+gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const lenis = useLenis();
+
+  // Scroll smoothly to top if already on the home page
+  const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      if (lenis) {
+        lenis.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-100 px-6 py-3">
+      <nav className="fixed top-0 left-0 w-full z-[100] px-6 py-3" style={{ transform: "translate3d(0, 0, 9999px)", zIndex: 9999 }}>
         <div className="container mx-auto max-w-7xl">
-          <div className="flex items-center justify-between bg-background/40 backdrop-blur-xl border border-white/10 rounded-full px-6 h-16 shadow-xl">
+          <div className="flex items-center justify-between bg-background/40 backdrop-blur-xl border border-white/10 rounded-md px-6 h-16 shadow-xl">
 
-            <Link href="/" className="flex items-center" aria-label="Arixon Labs Home">
+            <Link 
+              href="/" 
+              onClick={handleHomeClick}
+              className="flex items-center" 
+              aria-label="Arixon Labs Home"
+            >
               <div className="relative h-16 w-32 md:h-24 md:w-48 ml-[-20px] md:ml-[-45px]">
                 <Image
                   src="/assets/logo.png"
@@ -45,6 +61,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
+                  onClick={link.name === "HOME" ? handleHomeClick : undefined}
                   className="text-[10px] font-mono font-bold tracking-[0.3em] hover:text-primary transition-colors relative group"
                 >
                   {link.name}
@@ -57,7 +74,7 @@ const Navbar = () => {
             <div className="flex items-center gap-4">
               <Link
                 href="/contact"
-                className="hidden md:flex items-center gap-2 bg-primary px-5 py-2 rounded-full text-[10px] font-bold text-black hover:scale-105 transition-transform"
+                className="hidden md:flex items-center gap-2 bg-primary px-5 py-2 rounded-md text-[10px] font-bold text-black hover:scale-105 transition-transform"
                 aria-label="Start a new project"
               >
                 START A PROJECT <ArrowRight className="w-3 h-3" />
@@ -93,7 +110,6 @@ const Navbar = () => {
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
             id="mobile-menu"
             className="fixed inset-0 z-99 bg-background flex flex-col justify-center px-10 gap-8 md:hidden"
-
           >
             {navLinks.map((link, i) => (
               <motion.div
@@ -104,7 +120,12 @@ const Navbar = () => {
               >
                 <Link
                   href={link.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    setIsOpen(false);
+                    if (link.name === "HOME") {
+                      handleHomeClick(e);
+                    }
+                  }}
                   className="text-4xl font-light tracking-tighter hover:italic hover:pl-4 transition-all"
                 >
                   {link.name}
